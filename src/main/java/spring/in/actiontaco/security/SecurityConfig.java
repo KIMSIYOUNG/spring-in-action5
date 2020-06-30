@@ -28,16 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/taco", "/orders")
-                .access("hasRole('ROLE_USER')")
-            .antMatchers("/", "/**").access("permitAll")
+                .hasRole("USER")
+            .antMatchers("/", "/**")
+                .permitAll()
+            .antMatchers("/h2-console/**")
+            .permitAll()
             .and()
                 .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/taco",true)
             .and()
                 .logout()
-                    .logoutSuccessUrl("/")
-            .and()
-                .csrf();
+                    .logoutSuccessUrl("/");
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Override

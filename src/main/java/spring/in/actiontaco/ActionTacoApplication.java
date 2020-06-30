@@ -11,7 +11,6 @@ import spring.in.actiontaco.repository.IngredientRepository;
 
 @SpringBootApplication
 public class ActionTacoApplication {
-
     @Bean
     public CommandLineRunner dataLoader(IngredientRepository repo) {
         return args -> {
@@ -27,7 +26,6 @@ public class ActionTacoApplication {
             repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
         };
     }
-
 
     public static void main(String[] args) {
         SpringApplication.run(ActionTacoApplication.class, args);
